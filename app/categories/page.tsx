@@ -30,14 +30,14 @@ export default function CategoriesPage() {
               <Link
                 key={category}
                 href={`/category/${slugify(category)}`}
-                className="group relative overflow-hidden rounded-2xl"
+                className="group relative overflow-hidden rounded-md"
               >
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={categoryMeta[category].image || "/placeholder.svg"}
                     alt={category}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover transition-transform duration-500 group-hover:scale-125"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent" />
