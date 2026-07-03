@@ -148,3 +148,35 @@
 .hero-swiper .swiper-slide-active .hero-slide {
   height: 580px;
 }
+
+
+.lang-switch {
+  display: inline-flex;
+  background: #f4f4f5;
+  padding: 4px;
+  border-radius: 999px;
+  gap: 4px;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+}
+
+/* Optional active state (if you track language) */
+.lang-btn.active {
+  background: white;
+  color: #111;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}

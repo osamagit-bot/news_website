@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-
+import { LanguageProvider } from '@/context/LanguageContext'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const poppins = Poppins({
   subsets: ['latin'],
@@ -42,7 +42,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased">
+        <LanguageProvider>
         {children}
+        </LanguageProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

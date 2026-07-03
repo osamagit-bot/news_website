@@ -5,12 +5,17 @@ import { useEffect, useState } from "react"
 import { ArrowRight, Facebook, Instagram, Linkedin, Mail, Menu, Send, Twitter, X, Youtube, Zap } from "lucide-react"
 import { articles, categories } from "@/lib/articles"
 import type { ReactNode } from "react"
+import api from "@/lib/api"
+
+
 import {
   FaYoutube,
   FaFacebookF,
   FaXTwitter,
   FaTelegram,
 } from "react-icons/fa6"
+
+import { useLanguage } from "@/context/LanguageContext"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -50,6 +55,9 @@ function slugify(text: string) {
 function BreakingTicker() {
   const items = articles.filter((article) => article.breaking)
   const [index, setIndex] = useState(0)
+  const [news , setNews] = useState([]);
+
+  const {language} = useLanguage();
 
   useEffect(() => {
     if (items.length <= 1) return
@@ -61,6 +69,28 @@ function BreakingTicker() {
 
   if (items.length === 0) return null
 
+
+  useEffect(() => {
+
+    const fetchBreakingNews = async () => {
+      try {
+        const response = await api.get("/hero_content/")
+        setNews(response.data)
+       
+      } catch (error) {
+        console.error(error)
+        setNews([])
+      }
+    }
+
+    fetchBreakingNews();
+  }, [language]);
+
+  const showBreaking = news.length > 0 ? news : items;
+
+
+
+
   return (
     <div className="flex min-w-0 items-center gap-3 py-3 text-sm text-white/90">
       <span className="inline-flex shrink-0 items-center gap-1.5 rounded-sm bg-brand px-3 py-2 text-md font-semibold text-brand-foreground">
@@ -68,10 +98,10 @@ function BreakingTicker() {
         Breaking
       </span>
       <Link
-        href={`/news/${items[index].slug}`}
+        href={`/news/${showBreaking[index].slug}`}
         className="truncate transition-colors duration-500 hover:text-white"
       >
-        {items[index].title}
+        {showBreaking[index].title}
       </Link>
     </div>
   )
@@ -106,7 +136,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-
+const { language, setLanguage } = useLanguage();
   // Prevent body scroll when mobile menu is open
  useEffect(() => {
   if (open) {
@@ -167,6 +197,23 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             <span className="flex items-center gap-2 bg-white/10 px-4 py-2 text-sm">
               Monday, 07 March, 2021
             </span>
+    <div className="lang-switch">
+  <button
+    type="button"
+    onClick={() => setLanguage("en")}
+    className="lang-btn"
+  >
+    EN
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setLanguage("fa")}
+    className="lang-btn"
+  >
+    فارسی
+  </button>
+</div>
           </div>
         </div>
       </div>
