@@ -74,7 +74,7 @@ function BreakingTicker() {
 
     const fetchBreakingNews = async () => {
       try {
-        const response = await api.get("/hero_content/")
+        const response = await api.get("/news/hero/")
         setNews(response.data)
        
       } catch (error) {

@@ -50,7 +50,7 @@ export default function FeaturedPosts() {
  useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await api.get("/latest-news/");
+        const res = await api.get("/news/latest/");
         setPosts(res.data);
       } catch (err) {
         console.error(err);

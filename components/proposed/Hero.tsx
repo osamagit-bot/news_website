@@ -46,7 +46,7 @@ export default function Hero() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/hero_content/")
+        const response = await api.get("/news/hero/")
         setHerodata(response.data)
         console.log(response.data)
       } catch (error) {
