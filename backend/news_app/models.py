@@ -8,14 +8,17 @@ class Category(TranslatableModel):
         button_text=models.CharField(
             max_length=50,
             default='Explore More'
-        )
+        ),
+        short_description = models.CharField(max_length=300, default='Sports, Economic, World')
       
     )
     image = models.ImageField(upload_to='category_images/', default='Image')
 
     def __str__(self):
-     return self.safe_translation_getter('name', any_language=True)
-    
+        # Try to get the name in the current language
+        name = self.safe_translation_getter('name', any_language=True)
+        # Return a default if name is None or empty
+        return name if name else f"Category {self.id}"
 
 
 class News(TranslatableModel):
@@ -106,3 +109,17 @@ class News(TranslatableModel):
 #       title = models.ForeignKey(HeroContent, LatestNews)
 
 #    )
+
+
+
+class CategoryData(models.Model):
+    name=models.CharField(max_length=100, default='General')
+    button_text=models.CharField(
+            max_length=50,
+            default='Explore More'
+        )
+
+    short_description = models.CharField(max_length=300, default='Sports, Economic, World')
+
+    def __str__(self):
+        return self.name

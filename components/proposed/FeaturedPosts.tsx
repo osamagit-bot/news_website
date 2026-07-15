@@ -52,6 +52,7 @@ export default function FeaturedPosts() {
       try {
         const res = await api.get("/news/latest/");
         setPosts(res.data);
+        console.log(res.data);
       } catch (err) {
         console.error(err);
         setPosts([]);

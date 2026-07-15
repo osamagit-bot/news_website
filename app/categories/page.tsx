@@ -1,9 +1,13 @@
+
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { SiteShell, PageHero, NewsletterCta } from "@/components/proposed"
 import { categories, categoryMeta, getByCategory } from "@/lib/articles"
+import api from "@/lib/api"
+// import { useLanguage } from "@/context/LanguageContext"
+
 
 export const metadata: Metadata = {
   title: "Categories — Newpress",
@@ -13,6 +17,29 @@ export const metadata: Metadata = {
 function slugify(c: string) {
   return c.toLowerCase().replace(/\s+/g, "-")
 }
+
+// const {language} = useLanguage();
+// const [categoriesdata, setCategoriesdata] = useState([]);
+
+
+// useEffect(()=>{
+//  const fetchCategories=  async() =>{
+//    try {
+//     const response = await api.get("/categories/")
+//     setCategoriesdata(response.data);
+//     console.log(response.data);
+    
+    
+//   } catch (error) {
+//   console.log(error, "Failed to fetch categories!")    
+//   }
+// fetchCategories();
+//  }
+
+// },[language])
+
+
+
 
 export default function CategoriesPage() {
   return (

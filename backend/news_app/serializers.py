@@ -1,4 +1,4 @@
-from .models import  Category, News
+from .models import  Category, News, CategoryData
 from rest_framework import serializers
 from django.utils.translation import get_language
 
@@ -105,6 +105,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
+    short_description = serializers.SerializerMethodField()
     button_text = serializers.SerializerMethodField()
     image = serializers.SerializerMethodField()
     article_count = serializers.SerializerMethodField()
@@ -114,6 +115,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
+            "short_description",
             "image",
             "button_text",
             "article_count",
@@ -130,6 +132,8 @@ class CategorySerializer(serializers.ModelSerializer):
             "button_text",
             language_code=get_language()
         )
+    def get_short_description(self, obj):
+        return obj.safe_translation_getter("short_description" , language_code = get_language())
 
     def get_image(self, obj):
         request = self.context.get("request")
@@ -142,3 +146,10 @@ class CategorySerializer(serializers.ModelSerializer):
     
 
 
+class CategoryDataSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CategoryData
+        fields = ['id','name','short_description','button_text']
+
+
+    

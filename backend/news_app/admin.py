@@ -25,7 +25,7 @@ class NewsAdmin(TranslatableAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(TranslatableAdmin):
-    list_display = ('name', 'button_text')
+    list_display = ('name', 'button_text','short_description')
     search_fields = ('translations__name',)
 
 

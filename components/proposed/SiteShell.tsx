@@ -76,6 +76,7 @@ function BreakingTicker() {
       try {
         const response = await api.get("/news/hero/")
         setNews(response.data)
+        console.log(response.data)
        
       } catch (error) {
         console.error(error)
@@ -93,16 +94,16 @@ function BreakingTicker() {
 
   return (
     <div className="flex min-w-0 items-center gap-3 py-3 text-sm text-white/90">
-      <span className="inline-flex shrink-0 items-center gap-1.5 rounded-sm bg-brand px-3 py-2 text-md font-semibold text-brand-foreground">
+      {/* <span className="inline-flex shrink-0 items-center gap-1.5 rounded-sm bg-brand px-3 py-2 text-md font-semibold text-brand-foreground">
         <Zap className="h-3.5 w-3.5" />
         Breaking
       </span>
       <Link
-        href={`/news/${showBreaking[index].slug}`}
+        href={`/news/hero/${showBreaking[index].slug}`}
         className="truncate transition-colors duration-500 hover:text-white"
       >
         {showBreaking[index].title}
-      </Link>
+      </Link> */}
     </div>
   )
 }

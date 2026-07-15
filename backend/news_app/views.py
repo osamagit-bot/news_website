@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import  Category, News
-from .serializers import CategorySerializer,  NewsSerializer
+from .models import  Category, News, CategoryData
+from .serializers import CategorySerializer,CategoryDataSerializers,  NewsSerializer
 from rest_framework import viewsets
 from rest_framework.viewsets import ModelViewSet
 from django.utils.translation import activate
@@ -82,3 +82,9 @@ class CategoryViewSet(ModelViewSet):
         return context
     
 
+
+
+
+class CategoryDataViewSet(ModelViewSet):
+    queryset = CategoryData.objects.all()
+    serializer_class = CategoryDataSerializers
